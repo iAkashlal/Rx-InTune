@@ -19,6 +19,7 @@ struct MusicViewModel{
 }
 
 extension MusicViewModel{
+    //To return various values used by the ViewControllers
     var trackName: Observable<String>{
         return Observable<String>.just(musicItem.trackName)
     }

@@ -9,6 +9,8 @@
 import Foundation
 
 extension URL{
+    
+    //Returns URL for a particular query
     static func with(query: String) -> URL{
         let formattedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         return URL(string: "https://itunes.apple.com/search?term=\(formattedQuery)")!
