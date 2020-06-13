@@ -50,7 +50,7 @@ extension MusicListViewModel{
             .subscribe(onNext:{
                 self.loaderViewStatus.accept(true)
                 if $0.results.isEmpty{
-                    self.errorLabelText.accept("No songs by that name :( Please rephrase?")
+                    self.errorLabelText.accept("No songs by that name 😢 Please rephrase?")
                     self.toggleViewStatus.accept(false)
                 }
                 else{
