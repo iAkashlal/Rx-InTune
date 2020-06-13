@@ -1,6 +1,6 @@
 
 # InTune for iOS
-iOS Swift application to display songs using iTunes API. Built using MVVM architecture.
+iOS Swift application to display songs using iTunes API. Built using MVVM architecture with RxSwift.
 ![InTune iOS 12+ mobile application](https://github.com/iAkashlal/InTune/blob/master/InTune/Screenshots/3Adele.png?raw=true)
 
 # Requirements
