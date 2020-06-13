@@ -10,22 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct MusicListViewModel{
-    let musicVM : [MusicViewModel]
-}
-
-extension MusicListViewModel{
-    init(_ musicItems: [MusicItem]) {
-        self.musicVM = musicItems.map{MusicViewModel($0)}
-    }
-}
-
-extension MusicListViewModel{
-    func musicItem(at index: Int) -> MusicViewModel{
-        return musicVM[index]
-    }
-}
-
 struct MusicViewModel{
     let musicItem: MusicItem
     

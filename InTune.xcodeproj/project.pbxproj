@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		10A4889DF0881B9C62CF1997 /* Pods_InTune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D33823D322CE07BEECDAC0 /* Pods_InTune.framework */; };
 		76231B4E2430BDC800EA4F80 /* MusicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76231B4D2430BDC800EA4F80 /* MusicDetailViewController.swift */; };
+		764101742495137600AF8C76 /* MusicListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764101732495137600AF8C76 /* MusicListViewModel.swift */; };
 		7666BE252439C23B00791465 /* 2home.png in Resources */ = {isa = PBXBuildFile; fileRef = 7666BE212439C23A00791465 /* 2home.png */; };
 		7666BE262439C23B00791465 /* 3Adele.png in Resources */ = {isa = PBXBuildFile; fileRef = 7666BE222439C23A00791465 /* 3Adele.png */; };
 		7666BE272439C23B00791465 /* 4Akashlal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7666BE232439C23A00791465 /* 4Akashlal.png */; };
@@ -34,6 +35,7 @@
 		25C0409FC28C649506BCEE15 /* Pods-InTune.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InTune.release.xcconfig"; path = "Target Support Files/Pods-InTune/Pods-InTune.release.xcconfig"; sourceTree = "<group>"; };
 		75D33823D322CE07BEECDAC0 /* Pods_InTune.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InTune.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76231B4D2430BDC800EA4F80 /* MusicDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicDetailViewController.swift; sourceTree = "<group>"; };
+		764101732495137600AF8C76 /* MusicListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListViewModel.swift; sourceTree = "<group>"; };
 		7666BE212439C23A00791465 /* 2home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2home.png; sourceTree = "<group>"; };
 		7666BE222439C23A00791465 /* 3Adele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3Adele.png; sourceTree = "<group>"; };
 		7666BE232439C23A00791465 /* 4Akashlal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4Akashlal.png; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		7691731D2493B4280089FBC0 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				764101732495137600AF8C76 /* MusicListViewModel.swift */,
 				7691731E2493B7900089FBC0 /* MusicViewModel.swift */,
 				76967A6C242FBF970094F8FD /* InTuneModel.swift */,
 			);
@@ -336,6 +339,7 @@
 				76231B4E2430BDC800EA4F80 /* MusicDetailViewController.swift in Sources */,
 				76967A68242FAB3C0094F8FD /* MusicItemCell.swift in Sources */,
 				76F9D117242F584100748650 /* SearchResultModel.swift in Sources */,
+				764101742495137600AF8C76 /* MusicListViewModel.swift in Sources */,
 				76F8C1B4243108B100F71897 /* Box.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,14 +16,9 @@ class MusicViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var guideView: UIView!
     @IBOutlet weak var errorLabel: UILabel!
-    
-    //private let viewModel = InTuneModel.sharedInstance()
-    
-    var musicItems: [MusicItem]?
     @IBOutlet weak var searchBar: UISearchBar!
+    
     var selectedIndex: Int = 0
-    
-    
     var disposeBag = DisposeBag()
     private var viewModel : MusicListViewModel!
     private var selectedMusicModel: MusicViewModel!
@@ -34,22 +29,29 @@ class MusicViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "InTune Music"
         
+        viewModel = MusicListViewModel([MusicItem]())
+        
+        viewModel.toggleViewStatus.asDriver()
+            .drive(self.guideView.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.loaderViewStatus.asDriver()
+            .drive(self.loaderView.rx.isHidden)
+            .disposed(by: disposeBag)
+        viewModel.errorLabelText.asDriver()
+            .drive(self.errorLabel.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.tableViewReload.asDriver().drive(onNext: { _ in
+            self.tableView.reloadData()
+        })
+        
         self.searchBar.rx.searchButtonClicked.map{self.searchBar.text}
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (query) in
                 self.searchBar.resignFirstResponder()
                 if let query = query{
-                    if query.isEmpty{
-                        self.errorLabel.text = ""
-                        self.toggleGuideView(hidden: true)
-                    }
-                    else{
-                        self.search(for: query)
-                        self.errorLabel.text = "No songs by that name :( Please rephrase?"
-                    }
+                    self.viewModel.search(for: query)
                 }
             }).disposed(by: disposeBag)
-        //searchBar.rx.text.
         
         //Bindings
 //        viewModel.loaderVisible.bind{[weak self] shown in
@@ -81,22 +83,22 @@ class MusicViewController: UIViewController {
         }
     }
     
-    private func search(for query: String){
-        let resource = Resource<SearchResultModel>(url: URL.with(query: query))
-        URLSession.load(resource: resource)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext:{
-                if $0.results.isEmpty{
-                    self.toggleGuideView(hidden: false)
-                }
-                else{
-                    self.toggleGuideView(hidden: true)
-                }
-                self.viewModel = MusicListViewModel($0.results)
-                self.tableView.reloadData()
-            }).disposed(by: disposeBag)
-        
-    }
+//    private func search(for query: String){
+//        let resource = Resource<SearchResultModel>(url: URL.with(query: query))
+//        URLSession.load(resource: resource)
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onNext:{
+//                if $0.results.isEmpty{
+//                    self.toggleGuideView(hidden: false)
+//                }
+//                else{
+//                    self.toggleGuideView(hidden: true)
+//                }
+//                self.viewModel = MusicListViewModel($0.results)
+//                self.tableView.reloadData()
+//            }).disposed(by: disposeBag)
+//
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -123,6 +125,7 @@ extension MusicViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel == nil ? 0 : self.viewModel.musicVM.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath)
         
@@ -149,7 +152,6 @@ extension MusicViewController: UITableViewDataSource{
         }
         
         
-//
 //        guard let currentItem = musicItems?[indexPath.row],
 //            let trackName = currentItem.trackCensoredName,
 //            let genre = currentItem.primaryGenreName,
